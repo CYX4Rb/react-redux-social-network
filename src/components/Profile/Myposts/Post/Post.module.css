@@ -1,0 +1,16 @@
+
+.item {
+  color: rgb(6, 4, 160);
+  font-size: 35px;
+}
+
+span {
+  color: red;
+  font-size: 25px;
+}
+
+.ava {
+  width: 50px;
+  height: 50px;
+  border-radius: 150px;
+}

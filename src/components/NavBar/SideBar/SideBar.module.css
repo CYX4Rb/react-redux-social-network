@@ -1,0 +1,25 @@
+.bestFriends {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+
+}
+.friend {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+.friend a {
+    
+    color: white;
+    font-size: 9px;
+    text-align: center;
+}
+
+.bestFriends img {
+    margin: auto;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
