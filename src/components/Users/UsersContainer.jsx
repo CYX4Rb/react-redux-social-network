@@ -16,7 +16,6 @@ class UsersAPIComponent extends React.Component {
     }
 
     onPageChange = (pageNumber) => {
-        debugger
         this.props.getUsers(pageNumber, this.props.pageSize)
        /*  this.props.setCurrentPage(pageNumber) */ 
     }
