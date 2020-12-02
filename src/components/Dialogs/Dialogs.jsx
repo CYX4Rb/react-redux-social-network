@@ -2,19 +2,14 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
+import { Field, reduxForm } from 'redux-form'
+
 
 const Dialogs = (props) => {
-    let newPostMessage = React.createRef()
 
-    let addMessageClick = () => {
-        props.addMessageCreator()
+    const onSubmit = (formData) => { 
+        props.addMessageCreator(formData.newMessage)
     }
-
-    let onMessageChange = () => {
-        let element = newPostMessage.current.value
-        props.updateNewMessageCreator(element)
-    }
-
 
     return (
         <div className={s.dialogs}>
@@ -23,19 +18,29 @@ const Dialogs = (props) => {
             </div>
             <div className={s.back}>
                 <div className={s.messages}>
-                    {props.dialogPage.message.map(m => <Message message={m.message} />)}
-                    <div className={s.newMessage} >
-                        <textarea
-                            onChange={onMessageChange}
-                            ref={newPostMessage}
-                            value={props.dialogPage.newTextMessage}
-                            placeholder = 'enter your message'>
-                        </textarea>
-                        <button onClick={addMessageClick}>Отправить</button>
-                    </div>
+                    {props.dialogPage.message.map(m => <Message message={m.message} key = {m.id}/>)}
                 </div>
+                <NewMessageReduxForm onSubmit = {onSubmit}/>
             </div>
         </div>
     )
 }
+
+
+const NewMessageForm = (props) => {
+    return (
+        <form className={s.newMessage} onSubmit = {props.handleSubmit} >
+            <div><Field
+                name ='newMessage'
+                component = 'textarea' 
+                placeholder= 'enter your message'
+               /*  validate ={[required]} */></Field></div>
+            <button >Send</button>
+        </form>
+    )
+}
+
+
+const NewMessageReduxForm = reduxForm({form: "newMessage"})(NewMessageForm)
+
 export default Dialogs

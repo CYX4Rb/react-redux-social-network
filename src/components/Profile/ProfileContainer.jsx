@@ -8,15 +8,25 @@ import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.match.params.userId;
+    this.updateProfile(this.props.match.params.userId)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.match.params.userId != this.props.match.params.userId) {
+      this.updateProfile(nextProps.match.params.userId)
+      return true
+    }
+    return true
+  }
+
+  updateProfile = (userId) => {
     if (!userId) { userId = 12707 }
     this.props.getUserProfile(userId)
     this.props.getUserStatus(userId)
   }
-
   render() {
-    return <Profile {...this.props} profile={this.props.profile} status = {this.props.status}
-    updateStatus = {this.props.updateUserStatus} />
+    return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+      updateStatus={this.props.updateUserStatus} />
   }
 }
 
@@ -26,8 +36,8 @@ let mapStateToProps = (state) => ({
 })
 
 
-  export default compose(
-    withAuthRedirect,
-    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus}),
-    withRouter
-  )(ProfileContainer)
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
+  withRouter
+)(ProfileContainer)

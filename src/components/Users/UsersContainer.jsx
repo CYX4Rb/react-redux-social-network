@@ -21,7 +21,7 @@ class UsersAPIComponent extends React.Component {
     }
 
     render() {
-        return <>
+        return (<div key = {this.props.userId}> 
             {this.props.isFetching ? <Preloader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
@@ -33,7 +33,7 @@ class UsersAPIComponent extends React.Component {
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
             />
-        </>
+        </div>)
     }
 }
 
@@ -44,7 +44,8 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        /* userId: */ 
     }
 }
 
