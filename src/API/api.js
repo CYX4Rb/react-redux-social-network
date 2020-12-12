@@ -20,9 +20,18 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`).then(response => {
             return response.data.resultCode === 0 
         })
-    },
+    }
+}
+
+export const authAPI = {
     setAuth(){
         return instance.get(`auth/me`)
+    },
+    login(email, password, rememberMe = false){
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    logOut(){
+        return instance.delete(`auth/login`)
     }
 }
 

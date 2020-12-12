@@ -2,12 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import SideBarContainer from './SideBar/SideBarContainer'
 import s from './Navigation.module.css'
+import { connect } from 'react-redux'
 
 const NavBar = (props) => {
   return (
     <nav className={s.nav}>
       <div className={s.item} >
-        <NavLink to='/profile/12707' activeClassName={s.active}> My Profile</NavLink>
+        <NavLink to="/profile" activeClassName={s.active}> My Profile</NavLink>
       </div>
       <div className={s.item}>
         <NavLink to='/dialogs' activeClassName={s.active}>Messages</NavLink>
