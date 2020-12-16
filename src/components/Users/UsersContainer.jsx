@@ -1,23 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, getUsers } from '../../Redux/Users-reducer'
+import { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, requestUsers } from '../../Redux/Users-reducer'
 
 import Users from './Users'
 import Preloader from '../common/preloader'
-import { withAuthRedirect } from '../HOC/withAuthRedirect'
+/* import { withAuthRedirect } from '../HOC/withAuthRedirect' */
 import { compose } from 'redux'
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../Redux/users-selectors'
 
 
 
 class UsersAPIComponent extends React.Component {
     
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-       /*  this.props.setCurrentPage(pageNumber) */ 
+        this.props.requestUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -39,20 +39,19 @@ class UsersAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        /* userId: */ 
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
 
 export default compose(
-    withAuthRedirect,
+    /* withAuthRedirect, */
     connect(mapStateToProps,
-        { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, getUsers })
+        { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, requestUsers })
 )(UsersAPIComponent)
 

@@ -5,6 +5,7 @@ import no from '../../../assets/no.svg'
 import Preloader from '../../common/preloader'
 import userPhoto from '../../../assets/userPhoto.jpg'
 import StatusProfile from './ProfileStatus.jsx'
+import StatusProfileWithHook from './ProfileStatusWithHook'
 
 const ProfileInfo = (props) => {
     if(!props.profile){
@@ -17,7 +18,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <h3>{props.profile.fullName}</h3>
-                <StatusProfile status =  {props.status} updateStatus = {props.updateStatus} userId = {props.userId}/>
+                <StatusProfileWithHook status =  {props.status} updateStatus = {props.updateStatus} userId = {props.userId}/>
                 <img src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto} />
                 <p >{props.profile.aboutMe}</p>
                 <img  className = {s.lookingForAJob} src = {props.profile.lookingForAJob ? ok : no} />

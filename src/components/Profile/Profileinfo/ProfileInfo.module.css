@@ -11,3 +11,8 @@
   width: 30px;
   height: 20px;
 }
+
+.userStatus {
+  cursor: pointer;
+  color: red;
+}

@@ -4,7 +4,15 @@
     border-radius: 50%;
 }
 
-.selected {
-    font-weight: 600;
+.pageCount span {
+    cursor: pointer;
+}
+
+.unSelected  {
     color: black;
+}
+
+.selected{
+    font-weight: 600;
+    color: red;
 }

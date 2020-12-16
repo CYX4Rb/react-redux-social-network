@@ -1,6 +1,6 @@
 import React from 'react'
-/* import s from './ProfileInfo.module.css'
- */
+import s from './ProfileInfo.module.css'
+
 class StatusProfile extends React.Component {
 
     state = {
@@ -37,14 +37,15 @@ class StatusProfile extends React.Component {
     }
 
     render() {
+        
         return (
             <div>
-                {this.state.editMode && this.props.userId == 12707 // HARD CODE!!!!1
+                {this.state.editMode && !this.props.userId
                     ? <div>
                         <input onChange={this.onStatusOnChange} autoFocus={true} onBlur={this.deActivateEditMode} value={this.state.status} />
                     </div>
                     : <div>
-                        <span onDoubleClick={this.activateEditMode}>{this.props.status || '-------'}</span>
+                        <span onDoubleClick={this.activateEditMode} className = {s.userStatus} >{this.props.status || '-------'}</span>
                     </div>
 
                 }

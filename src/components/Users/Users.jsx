@@ -10,9 +10,9 @@ const Users = (props) => {
         pages.push(i)
     }
     return (<div>
-        <div>
+        <div className = {s.pageCount} >
             {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selected : NaN}
+                return <span className={props.currentPage === p ? s.selected : s.unSelected }
                     onClick={() => { props.onPageChange(p)}} >{p} </span>
             })}
         </div>
