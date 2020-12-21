@@ -3,16 +3,3 @@
     height: 100px;
     border-radius: 50%;
 }
-
-.pageCount span {
-    cursor: pointer;
-}
-
-.unSelected  {
-    color: black;
-}
-
-.selected{
-    font-weight: 600;
-    color: red;
-}

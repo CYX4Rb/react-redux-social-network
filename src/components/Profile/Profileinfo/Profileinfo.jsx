@@ -4,7 +4,6 @@ import ok from '../../../assets/ok.svg'
 import no from '../../../assets/no.svg'
 import Preloader from '../../common/preloader'
 import userPhoto from '../../../assets/userPhoto.jpg'
-import StatusProfile from './ProfileStatus.jsx'
 import StatusProfileWithHook from './ProfileStatusWithHook'
 
 const ProfileInfo = (props) => {

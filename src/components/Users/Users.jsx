@@ -2,21 +2,10 @@ import React from 'react'
 import s from './Users.module.css'
 import userPhoto from '../../assets/userPhoto.jpg'
 import { NavLink } from 'react-router-dom'
+import Paginator from '../common/Paginator/Paginator'
 
 const Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
     return (<div>
-        <div className = {s.pageCount} >
-            {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selected : s.unSelected }
-                    onClick={() => { props.onPageChange(p)}} >{p} </span>
-            })}
-        </div>
-
         {
             props.users.map(u => <main key={u.id}>
                 <div>
@@ -26,10 +15,12 @@ const Users = (props) => {
                     </NavLink>
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)}
-                            onClick={() => { props.unFollow(u.id)
+                            onClick={() => {
+                                props.changeFollow(u.id, false)
                             }}>UnFollow</button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)}
-                            onClick={() => { props.follow(u.id)
+                            onClick={() => {
+                                props.changeFollow(u.id, true)
                             }}>Follow</button>}
                 </div>
                 <div>
@@ -37,13 +28,16 @@ const Users = (props) => {
                         <h4>{u.name}</h4>
                         <p>{u.status}</p>
                     </section>
-                    <section>
-                        <h4>{/* {u.location.city} */}</h4>
-                        <h4>{/* {u.location.country} */}</h4>
-                    </section>
                 </div>
             </main>)
         }
+        <NavLink to={'/users/' + props.currentPage}>
+            <Paginator
+                totalCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChange={props.onPageChange} />
+        </NavLink>
     </div >)
 }
 

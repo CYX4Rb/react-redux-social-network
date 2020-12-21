@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import s from './ProfileInfo.module.css'
 
 class StatusProfile extends React.Component {
@@ -54,4 +54,4 @@ class StatusProfile extends React.Component {
     }
 }
 
-export default StatusProfile
+export default StatusProfile */

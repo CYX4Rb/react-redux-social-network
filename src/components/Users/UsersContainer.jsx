@@ -1,34 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, requestUsers } from '../../Redux/Users-reducer'
+import { changeFollow, toggleFollowingProgress, requestUsers, setCurrentPage } from '../../Redux/Users-reducer'
 
 import Users from './Users'
 import Preloader from '../common/preloader'
-/* import { withAuthRedirect } from '../HOC/withAuthRedirect' */
+import { withAuthRedirect } from '../HOC/withAuthRedirect'
 import { compose } from 'redux'
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../Redux/users-selectors'
+import { withRouter } from 'react-router-dom'
 
 
 
 class UsersAPIComponent extends React.Component {
-    
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (pageNumber) => {
         this.props.requestUsers(pageNumber, this.props.pageSize)
+        this.props.match.params.page = pageNumber
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.props.match.params.page != this.props.currentPage){
+            return true
+        }
+    }
+    
     render() {
+        debugger
         return (<div key = {this.props.userId}> 
             {this.props.isFetching ? <Preloader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
-                unFollow={this.props.unFollow}
-                follow={this.props.follow}
+                changeFollow={this.props.changeFollow}
                 onPageChange={this.onPageChange}
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
@@ -50,8 +57,9 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    /* withAuthRedirect, */
+    withAuthRedirect,
     connect(mapStateToProps,
-        { follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress, requestUsers })
+        {toggleFollowingProgress, requestUsers, changeFollow, setCurrentPage }),
+    withRouter
 )(UsersAPIComponent)
 
