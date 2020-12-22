@@ -27,12 +27,12 @@ const StatusProfileWithHook = React.memo((props) => {
 
     return (
         <div>
-            {editMode && !props.userId
+            {editMode && props.isOwner
                 ? <div>
                     <input onChange={onStatusOnChange} autoFocus={true} onBlur={deActivateEditMode} value={userStatus} />
                 </div>
                 : <div>
-                    <span onDoubleClick={activateEditMode} className={s.userStatus} >{props.status || '-------'}</span>
+                    <span onDoubleClick={activateEditMode} className={s.userStatus} >{props.status || 'No status'}</span>
                 </div>
 
             }

@@ -1,27 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './ProfileInfo.module.css'
 import ok from '../../../assets/ok.svg'
 import no from '../../../assets/no.svg'
-import Preloader from '../../common/preloader'
+import Preloader from '../../common/Preloader/preloader'
 import userPhoto from '../../../assets/userPhoto.jpg'
 import StatusProfileWithHook from './ProfileStatusWithHook'
 
-const ProfileInfo = (props) => {
-    if(!props.profile){
+
+const ProfileInfo = ({ profile, savePhoto, updateStatus, status, isOwner }) => {
+    if (!profile) {
         return <Preloader />
     }
+
+    let onMainPhotoSelected = (e) => {
+        if (e.target.files.length){
+            savePhoto(e.target.files[0])
+        }     
+    }
+
     return (
         <div>
-            <div>
-                <img className={s.backgr} src={'https://www.sunhome.ru/i/wallpapers/139/sinii-fon.orig.jpg'} alt='ни че не нашел(' />
-            </div>
+            {/* <div>
+                <img className={s.backgr} src={'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg'} alt='ни че не нашел(' />
+            </div> */}
             <div className={s.descriptionBlock}>
-                <h3>{props.profile.fullName}</h3>
-                <StatusProfileWithHook status =  {props.status} updateStatus = {props.updateStatus} userId = {props.userId}/>
-                <img src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto} />
-                <p >{props.profile.aboutMe}</p>
-                <img  className = {s.lookingForAJob} src = {props.profile.lookingForAJob ? ok : no} />
-                <p >{props.profile.lookingForAJobDescription}</p>
+                <h3>{profile.fullName}</h3>
+                <StatusProfileWithHook status={status} updateStatus={updateStatus} userProfileId={profile.userId} isOwner={isOwner} />
+                <img
+                    src={
+                        profile.photos.large !== null
+                            ? profile.photos.large
+                            : userPhoto
+                    }
+                />
+                {isOwner &&
+                    <div>
+                        <input onChange={onMainPhotoSelected} type={'file'} />
+                    </div>}
+                <p >{profile.aboutMe}</p>
+                <img className={s.lookingForAJob} src={profile.lookingForAJob ? ok : no} />
+                <p >{profile.lookingForAJobDescription}</p>
 
             </div>
         </div>

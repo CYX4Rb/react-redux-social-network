@@ -31,7 +31,7 @@ const Users = (props) => {
                 </div>
             </main>)
         }
-        <NavLink to={'/users/' + props.currentPage}>
+        <NavLink to={'/users/' + props.currentPage} className = {s.NavLink} >
             <Paginator
                 totalCount={props.totalUsersCount}
                 pageSize={props.pageSize}

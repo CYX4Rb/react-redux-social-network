@@ -1,20 +1,27 @@
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import NavBar from './components/NavBar/Navbar';
-import News from './components/News/News'
-import Music from './components/Music/Music'
-import Settings from './components/Settings/Settings'
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import { Route, withRouter } from 'react-router-dom';
-import Friends from './components/Friends/Friends';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
-import login from './components/Login/login';
 import { compose } from 'redux';
 import { initializedApp } from './Redux/App-reducer'
-import Preloader from './components/common/preloader';
+
+import HeaderContainer from './components/Header/HeaderContainer';
+import NavBar from './components/NavBar/Navbar';
+
+import Preloader from './components/common/Preloader/preloader';
+import { withSuspense } from './components/HOC/withSuspense';
+
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const Friends = React.lazy(() => import('./components/Friends/Friends'))
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
+const News = React.lazy(() => import('./components/News/News'))
+const Music = React.lazy(() => import('./components/Music/Music'))
+const Settings = React.lazy(() => import('./components/Settings/Settings'))
+const login = React.lazy(() => import('./components/Login/login'))
+
+
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -28,14 +35,30 @@ class App extends React.Component {
         <HeaderContainer />
         <NavBar />
         <div className='app-wrapper-content'>
-          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-          <Route path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/Friends' component={Friends} />
-          <Route path='/users/:page?' render={() => <UsersContainer />} />
-          <Route path='/news' component={News} />
-          <Route path='/music' component={Music} />
-          <Route path='/settings' component={Settings} />
-          <Route path='/login' component={login} />
+          <Route
+            path='/profile/:userId?'
+            render={withSuspense(ProfileContainer)} />
+          <Route
+            path='/dialogs'
+            render={withSuspense(DialogsContainer)} />
+          <Route
+            path='/Friends'
+            render={withSuspense(Friends)} />
+          <Route
+            path='/users/:page?'
+            render={withSuspense(UsersContainer)} />
+          <Route
+            path='/news'
+            render={withSuspense(News)} />
+          <Route
+            path='/music'
+            render={withSuspense(Music)} />
+          <Route
+            path='/settings'
+            render={withSuspense(Settings)} />
+          <Route
+            path='/login'
+            render={withSuspense(login)} />
         </div>
       </div>
   }

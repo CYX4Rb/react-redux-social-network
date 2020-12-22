@@ -10,7 +10,6 @@ import Post from './Post/Post'
 
 const MyPosts = React.memo((props) => {
 
-  debugger
   let addNewPost = (formData) => {
     props.addPost(formData.postText)
   }

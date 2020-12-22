@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './Paginator.module.css'
 import SmartSpan from './SmartSpan'
 

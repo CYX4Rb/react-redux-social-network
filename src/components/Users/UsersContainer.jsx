@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { changeFollow, toggleFollowingProgress, requestUsers, setCurrentPage } from '../../Redux/Users-reducer'
 
 import Users from './Users'
-import Preloader from '../common/preloader'
+import Preloader from '../common/Preloader/preloader'
 import { withAuthRedirect } from '../HOC/withAuthRedirect'
 import { compose } from 'redux'
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../Redux/users-selectors'
@@ -20,15 +20,8 @@ class UsersAPIComponent extends React.Component {
         this.props.requestUsers(pageNumber, this.props.pageSize)
         this.props.match.params.page = pageNumber
     }
-
-    shouldComponentUpdate(nextProps, nextState){
-        if(this.props.match.params.page != this.props.currentPage){
-            return true
-        }
-    }
     
     render() {
-        debugger
         return (<div key = {this.props.userId}> 
             {this.props.isFetching ? <Preloader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}

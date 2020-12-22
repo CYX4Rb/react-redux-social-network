@@ -1,17 +1,17 @@
 import React from 'react'
-import Preloader from '../common/preloader'
+import Preloader from '../common/Preloader/preloader'
 import MyPostsContainer from './Myposts/MyPostsContainer'
 import ProfileInfo from './Profileinfo/Profileinfo'
+import s from './Profile.module.css'
 
 const Profile = (props) => {
-  
-  if(!props.profile){
+  if (!props.profile) {
     return <Preloader />
   }
 
-  return <div >
-    <ProfileInfo profile = {props.profile} status = {props.status} updateStatus = {props.updateStatus} userId = {props.match.params.userId} />
-    <MyPostsContainer profile = {props.profile} />
+  return <div className = {s.profile} >
+    <ProfileInfo {...props} />
+    <MyPostsContainer profile={props.profile} />
   </div>
 }
 
