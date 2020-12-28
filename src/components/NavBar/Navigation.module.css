@@ -7,11 +7,19 @@
   color: white;
   text-decoration: none;
   line-height: 40px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
 }
 
 .item > a.active{
-  color: blue;
+  cursor: pointer;
+  color: rgb(0, 0, 161);
   line-height: 60px;
   font-size: 22px;
   font-weight: 700;
+  border: 2px solid  rgb(106, 218, 255);
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(106, 218, 255);
 }

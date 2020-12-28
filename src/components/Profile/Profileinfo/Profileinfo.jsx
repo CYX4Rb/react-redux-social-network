@@ -20,9 +20,6 @@ const ProfileInfo = ({ profile, savePhoto, updateStatus, status, isOwner }) => {
 
     return (
         <div>
-            {/* <div>
-                <img className={s.backgr} src={'https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg'} alt='ни че не нашел(' />
-            </div> */}
             <div className={s.descriptionBlock}>
                 <h3>{profile.fullName}</h3>
                 <StatusProfileWithHook status={status} updateStatus={updateStatus} userProfileId={profile.userId} isOwner={isOwner} />

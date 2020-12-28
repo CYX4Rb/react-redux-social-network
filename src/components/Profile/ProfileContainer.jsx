@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  componentDidMount = () => {
     this.updateProfile(this.props.match.params.userId)
   }
 
@@ -16,23 +16,23 @@ class ProfileContainer extends React.Component {
       return true
     }
     return true
-  } 
+  }
 
   updateProfile = (userId) => {
-    if (!userId) { userId = this.props.userId}
-    if(!userId){this.props.history.push('/login')}
+    if (!userId) { userId = this.props.userId }
+    if (!userId) { this.props.history.push('/login') }
     this.props.getUserProfile(userId)
     this.props.getUserStatus(userId)
   }
 
   render() {
-    return <Profile 
-    profile={this.props.profile} 
-    status={this.props.status}
+    return <Profile
+      profile={this.props.profile}
+      status={this.props.status}
       updateStatus={this.props.updateUserStatus}
-      savePhoto = {this.props.savePhoto}
-      userId = {this.props.userId}
-      isOwner = {this.props.userId == this.props.profile.userId} />
+      savePhoto={this.props.savePhoto}
+      userId={this.props.userId}
+      isOwner={this.props.userId == this.props.profile.userId} />
   }
 }
 

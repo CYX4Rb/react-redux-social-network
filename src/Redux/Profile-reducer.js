@@ -1,9 +1,9 @@
 import { profileAPI } from "../API/api"
 
-const ADD_POST = 'ADD-POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_USER_STATUS = 'SET_USER_STATUS'
-const SET_USER_PHOTO = 'SET_USER_PHOTO'
+const ADD_POST = 'profile/ADD-POST'
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
+const SET_USER_STATUS = 'profile/SET_USER_STATUS'
+const SET_USER_PHOTO = 'profile/SET_USER_PHOTO'
 
 let initialState = {
     posts: [

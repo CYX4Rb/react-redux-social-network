@@ -11,9 +11,9 @@ const Paginator = ({ totalCount, pageSize, currentPage, onPageChange }) => {
 
     return  <div className={s.pageCount} >
         {currentPage > 5
-            ? <SmartSpan
+            ? <SmartSpan className = {s.buttonStyle}
                 onPageChange={onPageChange}
-                style={`${s.unSelected}  ${s.first}`}
+                className={`${s.unSelected}  ${s.first}`}
                 currentValue={1} />
             : null
         }
@@ -22,13 +22,13 @@ const Paginator = ({ totalCount, pageSize, currentPage, onPageChange }) => {
             .map(p => {
                 return <SmartSpan
                     onPageChange={onPageChange}
-                    style={currentPage === p ? s.selected : s.unSelected}
+                    className={currentPage === p ? s.selected : s.unSelected}
                     currentValue={p} />
             })}
         {currentPage < pages[pages.length - 5]
             ? <SmartSpan
                 onPageChange={onPageChange}
-                style={`${s.unSelected}  ${s.last}`}
+                className={`${s.unSelected}  ${s.last}`}
                 currentValue={pages[pages.length - 1]} />
             : null}
     </div>

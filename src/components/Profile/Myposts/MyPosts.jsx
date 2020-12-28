@@ -8,10 +8,10 @@ import Post from './Post/Post'
 
 
 
-const MyPosts = React.memo((props) => {
+const MyPosts = React.memo(({profile, addPost, posts}) => {
 
   let addNewPost = (formData) => {
-    props.addPost(formData.postText)
+    addPost(formData.postText)
   }
   return (
     <div className={s.postsBlocked}>
@@ -20,17 +20,17 @@ const MyPosts = React.memo((props) => {
         <AddNewPostReduxForm onSubmit={addNewPost} />
       </div>
       <div className={s.posts}>
-        {props.posts.map(m => <Post photo = {props.profile.photos.small} message={m.message} likesCount={m.likesCount} key = {m.id}/>)}
+        {posts.map(m => <Post photo = {profile.photos.small} message={m.message} likesCount={m.likesCount} key = {m.id}/>)}
       </div>
-      <Paginator totalCount = {props.posts.length} pageSize = {5} />
+      <Paginator totalCount = {posts.length} pageSize = {5} />
     </div>
   )
 })
 const maxlength10 = MaxLengthCreator(10)
 
-const AddNewPostForm = (props) => {
+const AddNewPostForm = ({handleSubmit}) => {
   return (
-    <form onSubmit = {props.handleSubmit}>
+    <form onSubmit = {handleSubmit}>
       <Field
         component = {Textarea}
         name = 'postText'

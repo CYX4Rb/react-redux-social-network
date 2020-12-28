@@ -4,7 +4,9 @@
     align-items: center;
 }
 
-.pageCount span {
+
+
+.buttonStyle a {
     cursor: pointer;
     color: black;
     
@@ -14,6 +16,8 @@
     text-align: center;
     border-radius: 10%;
 }
+
+
 .pageCount .first {
     margin-right: 30px;
     margin-left: 0px;

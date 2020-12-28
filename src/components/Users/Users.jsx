@@ -4,23 +4,24 @@ import userPhoto from '../../assets/userPhoto.jpg'
 import { NavLink } from 'react-router-dom'
 import Paginator from '../common/Paginator/Paginator'
 
-const Users = (props) => {
+const Users = ({users, currentPage, totalUsersCount, pageSize, onPageChange, changeFollow, followingInProgress}) => {
+    debugger
     return (<div>
         {
-            props.users.map(u => <main key={u.id}>
+            users.map(u => <main key={u.id}>
                 <div>
                     {console.log(u.key)}
                     <NavLink to={'./Profile/' + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} alt='NaN' className={s.photo} />
                     </NavLink>
                     {u.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                        ? <button disabled={followingInProgress.some(id => id === u.id)}
                             onClick={() => {
-                                props.changeFollow(u.id, false)
+                                changeFollow(u.id, false)
                             }}>UnFollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                        : <button disabled={followingInProgress.some(id => id === u.id)}
                             onClick={() => {
-                                props.changeFollow(u.id, true)
+                                changeFollow(u.id, true)
                             }}>Follow</button>}
                 </div>
                 <div>
@@ -31,13 +32,13 @@ const Users = (props) => {
                 </div>
             </main>)
         }
-        <NavLink to={'/users/' + props.currentPage} className = {s.NavLink} >
+        {/* <NavLink to={'/Users/' + currentPage} className = {s.NavLink} > */}
             <Paginator
-                totalCount={props.totalUsersCount}
-                pageSize={props.pageSize}
-                currentPage={props.currentPage}
-                onPageChange={props.onPageChange} />
-        </NavLink>
+                totalCount={totalUsersCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={onPageChange} />
+        {/* </NavLink> */}
     </div >)
 }
 

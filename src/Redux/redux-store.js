@@ -5,8 +5,9 @@ import dialogReducer from './Dialog-reducer'
 import sideBarReducer from './SideBar-reducer'
 import usersReducer from "./Users-reducer";
 import authReducer from "./Auth-reducer";
-import {reducer as formReducer } from "redux-form";
+import { reducer as formReducer } from "redux-form";
 import appReducer from "./App-reducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -18,8 +19,13 @@ let reducers = combineReducers({
     app: appReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
-window.store = store
+/* eslint-disable no-underscore-dangle */
+let store = createStore(
+    reducers,
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
+)
+/* eslint-enable */
+    window.store = store
 
 export default store

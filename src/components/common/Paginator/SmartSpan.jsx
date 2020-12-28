@@ -1,8 +1,11 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const SmartSpan = (props) => {
-    return <span className={props.style}
-        onClick={() => { props.onPageChange(props.currentValue) }} >{props.currentValue}</span>
+const SmartSpan = ({ className, onPageChange, currentValue }) => {
+    return <NavLink to={'/Users/' + currentValue}  >
+        <span className={className}
+            onClick={() => { onPageChange(currentValue) }} >{currentValue}</span>
+    </NavLink>
 }
 
 export default SmartSpan

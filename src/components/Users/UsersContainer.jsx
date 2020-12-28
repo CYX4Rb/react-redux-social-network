@@ -12,13 +12,15 @@ import { withRouter } from 'react-router-dom'
 
 
 class UsersAPIComponent extends React.Component {
-    componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+    constructor(props){
+        super(props)
+        const pageId = Number(props.match.params.page || props.currentPage)
+        props.requestUsers(pageId, props.pageSize)
     }
+
 
     onPageChange = (pageNumber) => {
         this.props.requestUsers(pageNumber, this.props.pageSize)
-        this.props.match.params.page = pageNumber
     }
     
     render() {

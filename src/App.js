@@ -36,7 +36,7 @@ class App extends React.Component {
         <NavBar />
         <div className='app-wrapper-content'>
           <Route
-            path='/profile/:userId?'
+            path='/Profile/:userId?'
             render={withSuspense(ProfileContainer)} />
           <Route
             path='/dialogs'
@@ -45,7 +45,7 @@ class App extends React.Component {
             path='/Friends'
             render={withSuspense(Friends)} />
           <Route
-            path='/users/:page?'
+            path='/Users/:page?'
             render={withSuspense(UsersContainer)} />
           <Route
             path='/news'
